@@ -9,7 +9,7 @@ using YoutubeExplode.Videos.Streams;
 using Telegram.Bot.Types.InputFiles;
 // @YouTube_Video_Functions_Bot
 
-var botClient = new TelegramBotClient(token: "5264626683:AAHw2q73yM8s1tebQZTlQVQt3Y095qWaT5c"); // токен бота
+var botClient = new TelegramBotClient(token: "token"); // токен бота
 using var cts = new CancellationTokenSource(); // токен отмены
 var receiverOptions = new ReceiverOptions { // настройки получения обновлений
     AllowedUpdates = { }
@@ -28,23 +28,23 @@ Console.ReadLine();
 cts.Cancel();
 
 async Task HandleUpdatesAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken) {
-    if(update.Type == UpdateType.Message && update?.Message?.Text != null) {
+    if(update.Type == UpdateType.Message && update?.Message?.Text != null) { // проверка на то, что пользователь отправил сообщение
         await HandleMessage(botClient, update.Message);
         return;
     }
-    if(update!.Type == UpdateType.CallbackQuery) {
+    if(update!.Type == UpdateType.CallbackQuery) { // проверка на то, что пользователь нажал на inline-кнопку
         await HandleCallbackQuery(botClient, update!.CallbackQuery!);
         return;
     }
 }
 
-async Task HandleCallbackQuery (ITelegramBotClient botClient, CallbackQuery callbackQuery) {
+async Task HandleCallbackQuery (ITelegramBotClient botClient, CallbackQuery callbackQuery) { // метод для отправки сообщений пользователю после нажатия на inline-кнопку
     await botClient.SendTextMessageAsync(callbackQuery!.Message!.Chat.Id, text: $"{callbackQuery.Data}"); 
     return; 
 }
 
 async Task HandleMessage(ITelegramBotClient botClient, Message message) { 
-    if (message.Text == "/start") {
+    if (message.Text == "/start") { // начало работы с ботом
         ReplyKeyboardMarkup keyboard = new(new[] {
             new KeyboardButton[] { "YouTube ✅" }
         }) {
@@ -56,7 +56,7 @@ async Task HandleMessage(ITelegramBotClient botClient, Message message) {
 
     
     if (message.Text == "YouTube ✅") {
-        InlineKeyboardMarkup keyboard = new(new[] // клавиатура в сообщении
+        InlineKeyboardMarkup keyboard = new(new[] // реализация inline клавиатура под сообщением 
         {
             new[]
             {
@@ -68,18 +68,19 @@ async Task HandleMessage(ITelegramBotClient botClient, Message message) {
         await botClient.SendTextMessageAsync(message.Chat.Id, text: "Пример с получением видео: https://youtu.be/videoId видео \nПример с получением аудио: https://youtu.be/videoId аудио", replyMarkup: keyboard);
         return;
     }
-    if (message.Text != null && message.Text.EndsWith("видео") && message.Text.Length > 7) { // проверка, что пользователь запросил видео
+    if (message.Text != null && message.Text.EndsWith("видео") && message.Text.Length > 6) { // проверка, что пользователь запросил видео
+        
         string link = message.Text.Substring(0, message.Text.Length - 6);
         string filePath = $@"D:\testVideo\video.mp4";
 
         // Получение ссылки на видео от пользователя,
         // сохранение этого видео на диск с заменой существующего и отправка его в телеграм
-        var client = new YoutubeClient();
-        
+        var client = new YoutubeClient();       
         FileInfo fileInf = new FileInfo($@"D:\testVideo\video.mp4");   
         if (fileInf.Exists) {
             fileInf.Delete();
         }
+        // используем try catch для того, чтобы предотвратить остановку программы в случае получения неверных данных от пользователя
         try {
             var streamManifest = await client.Videos.Streams.GetManifestAsync(link);
             var streamInfo = (MuxedStreamInfo)streamManifest.GetMuxedStreams().GetWithHighestVideoQuality();
@@ -92,14 +93,14 @@ async Task HandleMessage(ITelegramBotClient botClient, Message message) {
         catch {
             await botClient.SendTextMessageAsync(message.Chat.Id, text: "Произошла ошибка 😕. Возможные причины: \n1. Объем файла слишком велик ❌ \n2. Отправленная ссылка некорректна ❌ ");
         }
-        // Получение ссылки на видео от пользователя,
-        // сохранение этого видео на диск с заменой существующего и отправка его в телеграм
         return;       
     }
 
     else if (message.Text != null && message.Text.EndsWith("аудио")) { // проверка, что пользователь запросил аудио
+
         string link = message.Text.Substring(0, message.Text.Length - 6);
         string filePath = $@"D:\testVideo\audio.mp3";
+
         // Получение ссылки на видео от пользователя,
         // сохранение аудио этого видео на диск с заменой существующего и отправка его в телеграм
         var client = new YoutubeClient();       
@@ -107,7 +108,8 @@ async Task HandleMessage(ITelegramBotClient botClient, Message message) {
         if (fileInf.Exists) {
             fileInf.Delete();
         }
-        try {
+        // используем try catch для того, чтобы предотвратить остановку программы в случае получения неверных данных от пользователя
+        try { 
             var streamManifest = await client.Videos.Streams.GetManifestAsync(link);
             var streamInfo = (AudioOnlyStreamInfo)streamManifest.GetAudioOnlyStreams().GetWithHighestBitrate();
             await client.Videos.Streams.DownloadAsync(streamInfo, filePath: $@"D:\testVideo\audio.mp3");
@@ -120,8 +122,6 @@ async Task HandleMessage(ITelegramBotClient botClient, Message message) {
             await botClient.SendTextMessageAsync(message.Chat.Id, text: "Произошла ошибка 😕. Возможные причины: \n1. Объем файла слишком велик ❌ \n2. Отправленная ссылка некорректна ❌ ");
         }
         return;
-        // Получение ссылки на видео от пользователя,
-        // сохранение аудио этого видео на диск с заменой существующего и отправка его в телеграм
     }
     await botClient.SendTextMessageAsync(message.Chat.Id, text: "Неизвестная команда 😐 ");
 }
