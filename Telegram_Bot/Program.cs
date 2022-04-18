@@ -135,12 +135,3 @@ Task HandleErrorAsync(ITelegramBotClient client, Exception exception, Cancellati
     Console.WriteLine(ErrorMessage); // вывод текста ошибки в консоль
     return Task.CompletedTask;
 }
-namespace Telegram_Bot {
-
-    class Program {
-
-        static void Main(string[] args) {
-            
-        }
-    }
-}

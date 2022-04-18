@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "f218aWKsMN4SMUM8bqkbU3+0Ak6o+m5HrlvrvSWvU6K5F2EHc5ySFv/hdsHCbyM/lHmWINnHqNjmwHC3BSZ2VQ==",
+  "dgSpecHash": "mL7fQAE4sOr6EYiUB+7pW0HVPom1jP4QucuJjPu8rcuXlQoGlDRbJMAFO/iWOtVtZ02aAeTLUpMkHgn7mIqhyw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DlyaS\\Desktop\\C#\\Telegram_Bot\\Telegram_Bot.csproj",
+  "projectFilePath": "C:\\Users\\DlyaS\\Documents\\GitHub\\TelegramBot\\Telegram_Bot\\Telegram_Bot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DlyaS\\.nuget\\packages\\anglesharp\\0.16.1\\anglesharp.0.16.1.nupkg.sha512",
     "C:\\Users\\DlyaS\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
