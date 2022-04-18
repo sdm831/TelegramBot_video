@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "f218aWKsMN4SMUM8bqkbU3+0Ak6o+m5HrlvrvSWvU6K5F2EHc5ySFv/hdsHCbyM/lHmWINnHqNjmwHC3BSZ2VQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\DlyaS\\Desktop\\C#\\Telegram_Bot\\Telegram_Bot.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\DlyaS\\.nuget\\packages\\anglesharp\\0.16.1\\anglesharp.0.16.1.nupkg.sha512",
+    "C:\\Users\\DlyaS\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\DlyaS\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\DlyaS\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\DlyaS\\.nuget\\packages\\system.text.encoding.codepages\\5.0.0\\system.text.encoding.codepages.5.0.0.nupkg.sha512",
+    "C:\\Users\\DlyaS\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512",
+    "C:\\Users\\DlyaS\\.nuget\\packages\\telegram.bot\\17.0.0\\telegram.bot.17.0.0.nupkg.sha512",
+    "C:\\Users\\DlyaS\\.nuget\\packages\\telegram.bot.extensions.polling\\1.0.2\\telegram.bot.extensions.polling.1.0.2.nupkg.sha512",
+    "C:\\Users\\DlyaS\\.nuget\\packages\\youtubeexplode\\6.1.2\\youtubeexplode.6.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}
