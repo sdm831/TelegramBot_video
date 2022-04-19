@@ -9,7 +9,7 @@ using YoutubeExplode.Videos.Streams;
 using Telegram.Bot.Types.InputFiles;
 // @YouTube_Video_Functions_Bot
 
-var botClient = new TelegramBotClient(token: "token"); // токен бота
+var botClient = new TelegramBotClient(token: "5264626683:AAHw2q73yM8s1tebQZTlQVQt3Y095qWaT5c"); // токен бота
 using var cts = new CancellationTokenSource(); // токен отмены
 var receiverOptions = new ReceiverOptions { // настройки получения обновлений
     AllowedUpdates = { }
