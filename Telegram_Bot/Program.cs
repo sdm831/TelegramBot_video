@@ -51,7 +51,7 @@ async Task HandleMessage(ITelegramBotClient botClient, Message message) {
         }) {
             ResizeKeyboard = true
         };
-        await botClient.SendTextMessageAsync(message.Chat.Id, text: "Нажмике ниже для получения подробной инструкции 🧐", replyMarkup: keyboard); // сообщение при начале работы бота, показ клавиатуры пользователю        
+        await botClient.SendTextMessageAsync(message.Chat.Id, text: "Нажмите ниже для получения подробной инструкции 🧐", replyMarkup: keyboard); // сообщение при начале работы бота, показ клавиатуры пользователю        
         return;
     }
 
@@ -65,7 +65,7 @@ async Task HandleMessage(ITelegramBotClient botClient, Message message) {
                 InlineKeyboardButton.WithCallbackData(text: "Audio (MP3) 🎧", callbackData: "Ссылка на видео + \"аудио\"")
             },
         });    
-        await botClient.SendTextMessageAsync(message.Chat.Id, text: "Выберите в какой формат сконвертировать ссылку, затем отправьте ссылку и через пробел введите \"видео\" или \"аудио\" соответственно ❗️");
+        await botClient.SendTextMessageAsync(message.Chat.Id, text: "Выберите в какой формат сконвертировать ссылку, затем введите ссылку и через пробел введите \"видео\" или \"аудио\" соответственно. Отправьте введённое сообщение❗️");
         await botClient.SendTextMessageAsync(message.Chat.Id, text: "Пример с получением видео: https://youtu.be/videoId видео \nПример с получением аудио: https://youtu.be/videoId аудио", replyMarkup: keyboard);
         return;
     }
