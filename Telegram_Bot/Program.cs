@@ -9,13 +9,14 @@ using YoutubeExplode.Videos.Streams;
 using Telegram.Bot.Types.InputFiles;
 // @YouTube_Video_Functions_Bot
 
-var botClient = new TelegramBotClient(token: "token"); // токен бота
+string token = "your bot's token";
+var botClient = new TelegramBotClient(token: $"{token}"); // токен бота
 using var cts = new CancellationTokenSource(); // токен отмены
 var receiverOptions = new ReceiverOptions { // настройки получения обновлений
     AllowedUpdates = { }
 };
 
-botClient.StartReceiving( // начало получение обновлений
+botClient.StartReceiving( // начало получения обновлений
     // параметры
     HandleUpdatesAsync,   
     HandleErrorAsync,
@@ -44,7 +45,7 @@ async Task HandleCallbackQuery (ITelegramBotClient botClient, CallbackQuery call
 }
 
 async Task HandleMessage(ITelegramBotClient botClient, Message message) { 
-    if (message.Text == "/start") { // начало работы с ботом
+    if (message.Text == "/start") { // команда запуска/обновления бота
         ReplyKeyboardMarkup keyboard = new(new[] {
             new KeyboardButton[] { "YouTube ✅" }
         }) {
@@ -68,12 +69,13 @@ async Task HandleMessage(ITelegramBotClient botClient, Message message) {
         await botClient.SendTextMessageAsync(message.Chat.Id, text: "Пример с получением видео: https://youtu.be/videoId видео \nПример с получением аудио: https://youtu.be/videoId аудио", replyMarkup: keyboard);
         return;
     }
+
+    // Получение ссылки на видео от пользователя
     if (message.Text != null && message.Text.EndsWith("видео") && message.Text.Length > 6) { // проверка, что пользователь запросил видео
         
         string link = message.Text.Substring(0, message.Text.Length - 6);
         string filePath = $@"D:\testVideo\video.mp4";
-
-        // Получение ссылки на видео от пользователя,
+        
         // сохранение этого видео на диск с заменой существующего и отправка его в телеграм
         var client = new YoutubeClient();       
         FileInfo fileInf = new FileInfo($@"D:\testVideo\video.mp4");   
@@ -96,12 +98,13 @@ async Task HandleMessage(ITelegramBotClient botClient, Message message) {
         return;       
     }
 
+
+    // Получение ссылки на видео от пользователя
     else if (message.Text != null && message.Text.EndsWith("аудио")) { // проверка, что пользователь запросил аудио
 
         string link = message.Text.Substring(0, message.Text.Length - 6);
         string filePath = $@"D:\testVideo\audio.mp3";
-
-        // Получение ссылки на видео от пользователя,
+      
         // сохранение аудио этого видео на диск с заменой существующего и отправка его в телеграм
         var client = new YoutubeClient();       
         FileInfo fileInf = new FileInfo($@"D:\testVideo\audio.mp3");
